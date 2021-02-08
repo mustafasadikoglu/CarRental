@@ -15,21 +15,31 @@ namespace CarRental.ConsoleUI
             //brandManager.Add(new Brand() { Name = "Citroen" });
 
             BrandList();
+
             Console.WriteLine("----------------------------");
+
             ColorManager colorManager = new ColorManager(new EfColorDal());
             //colorManager.Add(new Color() { Name = "Yeşil" });
+
             ColorList();
 
-            //Console.WriteLine(brandManager.Get(3).Name);
+            //GetByIdBrandTest(brandManager);
+
             Console.WriteLine("----------------------------");
+
             //JoinTest
             CarManager carManager = new CarManager(new EfCarDal());
             foreach (var car in carManager.GetCarDetails())
             {
-                Console.WriteLine("Marka: " + car.BrandName + "\n" + "Model: "  + car.CarName +"\n"+ "Renk: " + car.ColorName +"\n"+ "Günlük Fiyat: " + car.DailyPrice);
+                Console.WriteLine("Marka: " + car.BrandName + "\n" + "Model: " + car.CarName + "\n" + "Renk: " + car.ColorName + "\n" + "Günlük Fiyat: " + car.DailyPrice);
             }
 
 
+        }
+
+        private static void GetByIdBrandTest(BrandManager brandManager)
+        {
+            Console.WriteLine(brandManager.Get(3).Name);
         }
 
         private static void CarTest()
