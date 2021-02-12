@@ -29,9 +29,19 @@ namespace CarRental.ConsoleUI
 
             //JoinTest
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+
+            var result = carManager.GetCarDetails();
+            if (result.Success)
             {
-                Console.WriteLine("Marka: " + car.BrandName + "\n" + "Model: " + car.CarName + "\n" + "Renk: " + car.ColorName + "\n" + "Günlük Fiyat: " + car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine("Marka: " + car.BrandName + "\n" + "Model: " + car.CarName + "\n" + "Renk: " + car.ColorName + "\n" + "Günlük Fiyat: " + car.DailyPrice);
+                }
+                Console.WriteLine(result.Message);
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
 
 
@@ -39,34 +49,34 @@ namespace CarRental.ConsoleUI
 
         private static void GetByIdBrandTest(BrandManager brandManager)
         {
-            Console.WriteLine(brandManager.Get(3).Name);
+            //Console.WriteLine(brandManager.Get(3).Name);
         }
 
         private static void CarTest()
         {
-            CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetAll())
-            {
-                Console.WriteLine(car.Description);
-            }
+            //CarManager carManager = new CarManager(new EfCarDal());
+            //foreach (var car in carManager.GetAll())
+            //{
+            //    Console.WriteLine(car.Description);
+            //}
         }
 
         private static void BrandList()
         {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
-            {
-                Console.WriteLine(brand.Name);
-            }
+            //BrandManager brandManager = new BrandManager(new EfBrandDal());
+            //foreach (var brand in brandManager.GetAll())
+            //{
+            //    Console.WriteLine(brand.Name);
+            //}
         }
 
         private static void ColorList()
         {
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
-            {
-                Console.WriteLine(color.Name);
-            }
+            //ColorManager colorManager = new ColorManager(new EfColorDal());
+            //foreach (var color in colorManager.GetAll())
+            //{
+            //    Console.WriteLine(color.Name);
+            //}
         }
     }
 }
