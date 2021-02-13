@@ -15,5 +15,7 @@ namespace Business.Constants
         public static string CarsFilterListed = "Araçlar filtreye göre listelendi.";
         public static string BrandAdded = "Marka eklendi.";
         public static string BrandNameMinError = "Araba ismi minimum 2 karakter olmalı.";
+        public static string CarNotAvailable = "Araç mevcut değil";
+        public static string CarRentSuccess = "Araç kiralandı.";
     }
 }
