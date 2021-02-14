@@ -20,11 +20,16 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            if (rental.ReturnDate != null)
+            var results = _rendalDal.GetAll(r => r.CarId == rental.CarId);
+            foreach (var result in results)
             {
-                _rendalDal.Add(rental);
-                new SuccessResult(Messages.CarRentSuccess);
-            }
+                if (result.ReturnDate != null)
+                {
+                    _rendalDal.Add(rental);
+                    new SuccessResult(Messages.CarRentSuccess);
+                }
+            }     
+            
             return new ErrorResult(Messages.CarNotAvailable);
 
         }
