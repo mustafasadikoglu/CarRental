@@ -10,10 +10,8 @@ namespace CarRental.ConsoleUI
         static void Main(string[] args)
         {
 
-
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             CarManager carManager = new CarManager(new EfCarDal());
-
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             foreach (var rental in rentalManager.GetAll().Data)
             {
