@@ -11,21 +11,21 @@ namespace Business.Concrete
 {
     public class RentalManager : IRentalService
     {
-        IRentalDal _rendalDal;
+        IRentalDal _rentalDal;
 
         public RentalManager(IRentalDal rendalDal)
         {
-            _rendalDal = rendalDal;
+            _rentalDal = rendalDal;
         }
 
         public IResult Add(Rental rental)
         {
-            var results = _rendalDal.GetAll(r => r.CarId == rental.CarId);
+            var results = _rentalDal.GetAll(r => r.CarId == rental.CarId);
             foreach (var result in results)
             {
                 if (result.ReturnDate != null)
                 {
-                    _rendalDal.Add(rental);
+                    _rentalDal.Add(rental);
                     new SuccessResult(Messages.CarRentSuccess);
                 }
             }     
@@ -36,23 +36,23 @@ namespace Business.Concrete
 
         public IResult Delete(Rental rental)
         {
-            _rendalDal.Delete(rental);
+            _rentalDal.Delete(rental);
             return new SuccessResult();
         }
 
         public IDataResult<Rental> Get(int id)
         {
-            return new SuccessDataResult<Rental>(_rendalDal.Get(r => r.Id == id));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
         }
 
         public IDataResult<List<Rental>> GetAll()
         {
-            return new SuccessDataResult<List<Rental>>(_rendalDal.GetAll());
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
         }
 
         public IResult Update(Rental rental)
         {
-            _rendalDal.Update(rental);
+            _rentalDal.Update(rental);
             return new SuccessResult();
         }
     }

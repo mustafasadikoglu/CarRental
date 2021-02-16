@@ -19,7 +19,7 @@ namespace CarRental.ConsoleUI
             Console.WriteLine("----------------------------");
 
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            //colorManager.Add(new Color() { Name = "Yeşil" });
+           
 
             ColorList();
 
