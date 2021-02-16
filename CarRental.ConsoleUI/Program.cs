@@ -12,23 +12,29 @@ namespace CarRental.ConsoleUI
 
 
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            //brandManager.Add(new Brand() { Name = "Citroen" });
-
-            BrandList();
-
-            Console.WriteLine("----------------------------");
-
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-           
-
-            ColorList();
-
-            //GetByIdBrandTest(brandManager);
-
-            Console.WriteLine("----------------------------");
-
-            //JoinTest
             CarManager carManager = new CarManager(new EfCarDal());
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            foreach (var rental in rentalManager.GetAll().Data)
+            {
+                Console.WriteLine(rental.CarId);
+            }
+
+            rentalManager.Add(new Rental
+            {
+                CarId = 2,
+                CustomerId = 1,
+                RentDate = DateTime.Now,
+                ReturnDate = null
+            });
+
+
+
+        }
+
+        private static void CarDetails(CarManager carManager)
+        {
+
 
             var result = carManager.GetCarDetails();
             if (result.Success)
@@ -43,8 +49,6 @@ namespace CarRental.ConsoleUI
             {
                 Console.WriteLine(result.Message);
             }
-
-
         }
 
         private static void GetByIdBrandTest(BrandManager brandManager)
