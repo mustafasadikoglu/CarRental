@@ -17,5 +17,8 @@ namespace Business.Constants
         public static string BrandNameMinError = "Araba ismi minimum 2 karakter olmalı.";
         public static string CarNotAvailable = "Araç mevcut değil";
         public static string CarRentSuccess = "Araç kiralandı.";
+        public static string ImageLimitError = "Araç için maksimum fotoğraf sayısı 5 olmalı";
+
+        public static string ImageAdded = "Resim eklendi.";
     }
 }
