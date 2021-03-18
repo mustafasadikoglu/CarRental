@@ -15,13 +15,12 @@ namespace Business.Concrete
 {
     public class CarImageManager : ICarImageService
     {
-        ICarImageDal _carImageDal;
-        ICarService _carService;
+        ICarImageDal _carImageDal;       
 
-        public CarImageManager(ICarImageDal carImageDal, ICarService carService)
+        public CarImageManager(ICarImageDal carImageDal)
         {
             _carImageDal = carImageDal;
-            _carService = carService;
+            
         }
 
         public IResult Add(CarImage carImage, IFormFile file)
@@ -87,7 +86,7 @@ namespace Business.Concrete
         private IResult CheckIfImageLimit(int carId)
         {
             var result = _carImageDal.GetAll(i => i.CarId == carId).Count;
-            if (result > 5)
+            if (result > 50)
             {
                 return new ErrorResult(Messages.ImageLimitError);
             }

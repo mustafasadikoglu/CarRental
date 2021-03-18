@@ -18,8 +18,8 @@ namespace Core.Utilities.Helpers
         }
         public static string Add(IFormFile file)
         {
-          
-            var sourcePath = Path.Combine(Directory.GetCurrentDirectory(), "Images\\", newPath(file));
+            var result = newPath(file);
+            var sourcePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Images\\", result);
             if (file.Length > 0)
             {
                 using (var stream = new FileStream(sourcePath, FileMode.Create))
@@ -27,7 +27,7 @@ namespace Core.Utilities.Helpers
                     file.CopyTo(stream);
                 }
             }
-            var result = newPath(file);
+            
             //File.Move(sourcePath);
             return result;
         }

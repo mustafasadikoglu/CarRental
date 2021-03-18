@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Busine
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{AFFE9522-1CDE-4B2C-AAE5-E26932BBCB74}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRental.ConsoleUI", "CarRental.ConsoleUI\CarRental.ConsoleUI.csproj", "{76D7F458-9B3F-45CD-90AD-CDA39B20D368}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{FEC86EB3-C1F8-4F21-BB3C-5D4BA784DAAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{FEC86EB3-C1F8-4F21-BB3C-5D4BA784DAAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{AFFE9522-1CDE-4B2C-AAE5-E26932BBCB74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFFE9522-1CDE-4B2C-AAE5-E26932BBCB74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFFE9522-1CDE-4B2C-AAE5-E26932BBCB74}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76D7F458-9B3F-45CD-90AD-CDA39B20D368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76D7F458-9B3F-45CD-90AD-CDA39B20D368}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76D7F458-9B3F-45CD-90AD-CDA39B20D368}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76D7F458-9B3F-45CD-90AD-CDA39B20D368}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FEC86EB3-C1F8-4F21-BB3C-5D4BA784DAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FEC86EB3-C1F8-4F21-BB3C-5D4BA784DAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEC86EB3-C1F8-4F21-BB3C-5D4BA784DAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU

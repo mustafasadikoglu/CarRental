@@ -22,6 +22,7 @@ namespace Core.Utilities.Security.JWT
         {
             Configuration = configuration;
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            //_tokenOptions = Configuration.GetSection("TokenOptions") as TokenOptions;EntityFramework5
 
         }
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)

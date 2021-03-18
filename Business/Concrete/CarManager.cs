@@ -5,10 +5,12 @@ using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,21 +19,25 @@ namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
-        ICarDal _carDal;
-        ICarImageService _carImageService;
+        ICarDal _carDal;        
 
-        public CarManager(ICarDal carDal, ICarImageService carImageService)
+        public CarManager(ICarDal carDal)
         {
-            _carDal = carDal;
-            _carImageService = carImageService;
+            _carDal = carDal;            
         }
 
-        [SecuredOperation("admin")]
-        [ValidationAspect(typeof(CarValidator))]
+        //[SecuredOperation("admin")]
+        //[ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
-            _carImageService.Add(car);
+            //if (file != null)
+            //{
+            //    carImage.ImagePath = FileHelper.Add(file);
+            //}
+            //carImage.Date = DateTime.Now;            
+            //carImage.CarId = car.Id;
+            //_carImageService.Add(carImage, file);
             return new SuccessResult(Messages.CarAdded);
 
         }
@@ -54,12 +60,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id));
         }
-
-        public IDataResult<List<CarDetailDto>> GetCarByBrand(int id)
-        {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetails(c => c.BrandId == id));
-        }
-
+        [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetAllCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetails());
@@ -90,12 +91,18 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdated);
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarDetails()
-        {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
-        }
 
         public IDataResult<List<CarDetailDto>> GetCarDetailsByColor(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetails(c => c.ColorId == id));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByBrand(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetails(b => b.BrandId == id));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByColor(int id)
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetails(c => c.ColorId == id));
         }
