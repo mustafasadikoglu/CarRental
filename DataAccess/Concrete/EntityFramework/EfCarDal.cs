@@ -2,6 +2,7 @@
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,22 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
 
 
+            }
+        }
+        public virtual List<Car> GetList(Expression<Func<Car, bool>> filter = null)
+        {
+            using (var context = new RentalCarsContext())
+            {
+                return filter == null
+                    ? context.Set<Car>().Include(x => x.Brand).Include(x => x.Color).Include(x => x.CarImages).ToList()
+                    : context.Set<Car>().Include(x => x.Brand).Include(x => x.Color).Include(x => x.CarImages).Where(filter).ToList();
+            }
+        }
+        public Car Get(Expression<Func<Car, bool>> filter = null)
+        {
+            using (var context = new RentalCarsContext())
+            {
+                return context.Set<Car>().Include(x => x.Brand).Include(x => x.Color).Include(x => x.CarImages).FirstOrDefault(filter);
             }
         }
 
