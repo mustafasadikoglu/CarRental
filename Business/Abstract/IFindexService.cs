@@ -8,6 +8,7 @@ namespace Business.Abstract
 {
     public interface IFindexService
     {
-        IDataResult<Findex> GetFindexByUserId(int userId);        
+        IDataResult<Findex> GetFindexByUserId(int userId);
+        IResult Add(Findex findex);
     }
 }

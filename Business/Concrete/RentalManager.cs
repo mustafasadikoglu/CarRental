@@ -102,5 +102,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.CarId == carId));
         }
+
+        public IDataResult<List<CustomerRentDetailDto>> GetRentalsByEmail(string email)
+        {
+            return new SuccessDataResult<List<CustomerRentDetailDto>>(_rentalDal.GetRentalDetailsByEmail(r => r.Email == email));
+        }
     }
 }

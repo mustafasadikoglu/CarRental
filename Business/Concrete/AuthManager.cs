@@ -17,12 +17,14 @@ namespace Business.Concrete
         private IUserService _userService;
         private ITokenHelper _tokenHelper;
         private ICustomerService _customerService;
+        private IFindexService _findexService;
 
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper,ICustomerService customerService)
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICustomerService customerService, IFindexService findexService)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
             _customerService = customerService;
+            _findexService = findexService;
         }
 
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
@@ -36,17 +38,25 @@ namespace Business.Concrete
                 LastName = userForRegisterDto.LastName,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                Status = true,                
+                Status = true,
             };
-           
+
             _userService.Add(user);
             int customerUserId = user.Id;
             var customer = new Customer
             {
                 UserId = customerUserId,
-                CompanyName = userForRegisterDto.CompanyName
+                CompanyName = userForRegisterDto.CompanyName,
             };
             _customerService.Add(customer);
+            var customerFindex = new Findex
+            {
+                UserId = customerUserId,
+                Point = new Random().Next(600, 1900)
+            };
+
+            _findexService.Add(customerFindex);
+
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
@@ -94,7 +104,7 @@ namespace Business.Concrete
                 LastName = userForUpdate.LastName,
                 PasswordHash = currentUser.Data.PasswordHash,
                 PasswordSalt = currentUser.Data.PasswordSalt,
-                Status=true
+                Status = true
             };
 
             byte[] passwordHash, passwordSalt;

@@ -137,10 +137,6 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
-
-        //IDataResult<List<CarImage>> ICarImageService.GetImageByCarId(int id)
-        //{
-        //    return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(i=>i.CarId==id));
-        //}
+        
     }
 }

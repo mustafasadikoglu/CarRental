@@ -27,7 +27,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  LastName = u.LastName,
                                  Email = u.Email,
                                  CompanyName = c.CompanyName,
-                                 FindexPoint = (from f in context.Findex where f.UserId == c.UserId select f.Point).FirstOrDefault()
+                                 FindexPoint = (from f in context.Findexs where f.UserId == c.UserId select f.Point).FirstOrDefault()
                              };
 
                 return result.SingleOrDefault(filter);
@@ -48,7 +48,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  LastName = u.LastName,
                                  Email = u.Email,
                                  CompanyName = c.CompanyName,
-                                 FindexPoint = (from f in context.Findex where f.UserId == c.UserId select f.Point).FirstOrDefault()
+                                 FindexPoint = (from f in context.Findexs where f.UserId == c.UserId select f.Point).FirstOrDefault()
                              };
                 // (from a in context.CarImages where a.CarId == c.Id select a.ImagePath).FirstOrDefault()
 

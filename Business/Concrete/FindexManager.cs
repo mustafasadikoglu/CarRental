@@ -17,6 +17,12 @@ namespace Business.Concrete
             _findexDal = findexDal;
         }
 
+        public IResult Add(Findex findex)
+        {
+            _findexDal.Add(findex);
+            return new SuccessResult();
+        }
+
         public IDataResult<Findex> GetFindexByUserId(int userId)
         {
             return new SuccessDataResult<Findex>(_findexDal.Get(f => f.UserId == userId));
