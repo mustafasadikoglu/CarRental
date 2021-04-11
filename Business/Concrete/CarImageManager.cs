@@ -15,12 +15,12 @@ namespace Business.Concrete
 {
     public class CarImageManager : ICarImageService
     {
-        ICarImageDal _carImageDal;       
+        ICarImageDal _carImageDal;
 
         public CarImageManager(ICarImageDal carImageDal)
         {
             _carImageDal = carImageDal;
-            
+
         }
 
         public IResult Add(CarImage carImage, IFormFile file)
@@ -70,13 +70,13 @@ namespace Business.Concrete
 
         private List<CarImage> CheckIfCarImageNull(int id)
         {
-            string path = @"\Images\logo.jpg";
+            string path = "logo.jpg";
 
             //var carData = _carService.GetById(id).Data;
 
             var result = _carImageDal.GetAll(c => c.CarId == id).Count();
 
-            if (result<1)
+            if (result < 1)
             {
                 return new List<CarImage> { new CarImage { CarId = id, ImagePath = path, Date = DateTime.Now } };
             }
@@ -114,5 +114,33 @@ namespace Business.Concrete
             _carImageDal.Update(carImage);
             return new SuccessResult();
         }
+
+        public IDataResult<CarImage> GetImageByCarId(int id)
+        {
+            return new SuccessDataResult<CarImage>(_carImageDal.GetAll(i => i.CarId == id).FirstOrDefault());
+        }
+
+        public string GetImagePathByCarId(int id)
+        {
+            var result = _carImageDal.GetAll(i => i.CarId == id).FirstOrDefault();
+            if (result!=null)
+            {
+                return result.ImagePath;
+            }
+            else
+            {
+                return "logo.jpg";
+            }
+        }
+
+        public IDataResult<List<CarImage>> GetAll()
+        {
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
+        }
+
+        //IDataResult<List<CarImage>> ICarImageService.GetImageByCarId(int id)
+        //{
+        //    return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(i=>i.CarId==id));
+        //}
     }
 }

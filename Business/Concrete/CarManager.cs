@@ -27,17 +27,11 @@ namespace Business.Concrete
         }
 
         //[SecuredOperation("admin")]
-        //[ValidationAspect(typeof(CarValidator))]
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
-            //if (file != null)
-            //{
-            //    carImage.ImagePath = FileHelper.Add(file);
-            //}
-            //carImage.Date = DateTime.Now;            
-            //carImage.CarId = car.Id;
-            //_carImageService.Add(carImage, file);
+            
             return new SuccessResult(Messages.CarAdded);
 
         }
@@ -69,13 +63,13 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id), Messages.CarsFilterListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetList(c => c.BrandId == id), Messages.CarsFilterListed);
         }
 
 
         public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id), Messages.CarsFilterListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetList(c => c.ColorId == id), Messages.CarsFilterListed);
         }
         [TransactionScopeAspect]
         public IResult TransactionalOperation(Car car)
@@ -105,6 +99,11 @@ namespace Business.Concrete
         public IDataResult<List<CarDetailDto>> GetCarsByColor(int id)
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetails(c => c.ColorId == id));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandAndColor(int brandId, int colorId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetails(b => b.BrandId == brandId && b.ColorId == colorId));
         }
     }
 }

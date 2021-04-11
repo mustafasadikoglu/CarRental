@@ -26,6 +26,19 @@ namespace Business.Constants
         public static string PasswordError = "Parola hatası";
         public static string SuccessfulLogin = "Başarılı giriş";
         public static string UserAlreadyExists = "Kullanıcı mevcut";
-        public static string AccessTokenCreated = "Token oluşturuldu";
+        public static string AccessTokenCreated = "Başarılı";
+
+        public static string CustomerUpdated = "Müşteri güncellendi";
+
+        public static string CustomerFindexPointZero = "Müşteri findeks puanı sıfır";
+
+        public static string CustomerScoreIsInsufficient = "Müşteri findex puanı yetersiz.";
+
+        public static string CarIsRentalled = "Araç heniz teslim edilmemiş";
+
+        public static string CardUpdated { get; internal set; }
+        public static string CardDeleted { get; internal set; }
+        public static string CardAdded { get; internal set; }
+        public static string CardAlreadyExists { get; internal set; }
     }
 }

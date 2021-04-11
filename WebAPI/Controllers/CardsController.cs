@@ -11,31 +11,45 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColorsController : ControllerBase
+    public class CardsController : ControllerBase
     {
-        IColorService _colorService;
+        private readonly ICardService _cardService;
 
-        public ColorsController(IColorService colorService)
+        public CardsController(ICardService cardService)
         {
-            _colorService = colorService;
+            _cardService = cardService;
         }
-
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _colorService.GetAll();
+            var result = _cardService.GetAll();
+
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+        }
+
+        [HttpGet("getbycustomerid")]
+        public IActionResult GetByCustomerId(int customerId)
+        {
+            var result = _cardService.GetByCustomerId(customerId);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Color color)
+        public IActionResult Add(Card card)
         {
-            var result = _colorService.Add(color);
+            var result = _cardService.Add(card);
+
             if (result.Success)
             {
                 return Ok(result);
@@ -43,10 +57,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("update")]
-        public IActionResult Update(Color color)
+        [HttpPut]
+        public IActionResult Update(Card card)
         {
-            var result = _colorService.Update(color);
+            var result = _cardService.Update(card);
             if (result.Success)
             {
                 return Ok(result);
@@ -54,28 +68,16 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(Color color)
+        [HttpDelete]
+        public IActionResult Delete(Card card)
         {
-            var result = _colorService.Delete(color);
+            var result = _cardService.Delete(card);
+
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
-        [HttpGet("getcolorbyid")]
-        public IActionResult GetColorById(int id)
-        {
-            var result = _colorService.GetColorById(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-
     }
 }
